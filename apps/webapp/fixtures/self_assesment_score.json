@@ -1,0 +1,30 @@
+[
+  {
+    "model": "webapp.SelfAssesmentScore",
+    "pk": 1,
+    "fields": {
+      "description": "Kompetensi mampu dilakukan secara mandiri"
+    }
+  },
+  {
+    "model": "webapp.SelfAssesmentScore",
+    "pk": 2,
+    "fields": {
+      "description": "Kompetensi memerlukan supervisi"
+    }
+  },
+  {
+    "model": "webapp.SelfAssesmentScore",
+    "pk": 3,
+    "fields": {
+      "description": "Tidak dimintakan kewenangannya karena diluar kompetesinya"
+    }
+  },
+  {
+    "model": "webapp.SelfAssesmentScore",
+    "pk": 4,
+    "fields": {
+      "description": "Tidak dimintakan kewenangannya karena fasilitas tidak tersedia"
+    }
+  }
+]

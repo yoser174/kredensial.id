@@ -1,0 +1,16 @@
+{
+  "menu": [
+    {
+      "url": "index",
+      "icon": "menu-icon tf-icons mdi mdi-home-outline",
+      "name": "Home",
+      "slug": "index"
+    },
+    {
+      "url": "kredensial_lists",
+      "icon": "menu-icon tf-icons mdi mdi-file-outline",
+      "name": "Daftar Kredensial",
+      "slug": "kredensial_lists"
+    }
+  ]
+}

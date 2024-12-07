@@ -1,0 +1,177 @@
+[
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 1,
+    "fields": {
+      "name": "Psikologi Klinis"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 2,
+    "fields": {
+      "name": "Apoteker dan tenaga teknis kefarmasian"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 3,
+    "fields": {
+      "name": "Tenaga Kesehatan Masyarakat"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 4,
+    "fields": {
+      "name": "Tenaga Kesehatan Lingkungan"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 5,
+    "fields": {
+      "name": "Fisioterapi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 6,
+    "fields": {
+      "name": "Okupasi terapi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 7,
+    "fields": {
+      "name": "Terapis wicara"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 8,
+    "fields": {
+      "name": "Akupuntur"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 9,
+    "fields": {
+      "name": "Perekam Medis dan informasi kesehatan"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 10,
+    "fields": {
+      "name": "Teknik Kardiovaskuler"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 11,
+    "fields": {
+      "name": "Teknisi Pelayanan Darah"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 12,
+    "fields": {
+      "name": "eknisi Gizi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 13,
+    "fields": {
+      "name": "Refraksionis Optisien/Optometris"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 14,
+    "fields": {
+      "name": "Penata Anastesi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 15,
+    "fields": {
+      "name": "Terapis Gigi & Mulut"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Audiologi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Radiografer"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Elektromedik"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Ahli Teknologi Laboratorium Medik (ATLM) - Bidang Patologi Klinik"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Ahli Teknologi Laboratorium Medik (ATLM) - Bidang Patologi Anatomi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Radioterapis"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Fisikawan Medik - Bidang Radioterapi"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Fisikawan Medik - Bidang Radiodiagnostik"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Fisikawan Medik - Bidang Kedokteran Nuklir"
+    }
+  },
+  {
+    "model": "webapp.ProfesiNakes",
+    "pk": 16,
+    "fields": {
+      "name": "Ortotik Prostetik"
+    }
+  }
+]

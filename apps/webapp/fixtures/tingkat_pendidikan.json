@@ -1,0 +1,44 @@
+[
+  {
+    "model": "webapp.TingkatPendidikan",
+    "pk": 1,
+    "fields": {
+      "name": "Sekolah Menengah Atas (SMA)"
+    }
+  },
+  {
+    "model": "webapp.TingkatPendidikan",
+    "pk": 2,
+    "fields": {
+      "name": "Sekolah Menengah Kejuruan (SMK)"
+    }
+  },
+  {
+    "model": "webapp.TingkatPendidikan",
+    "pk": 3,
+    "fields": {
+      "name": "Diploma (D3/D4)"
+    }
+  },
+  {
+    "model": "webapp.TingkatPendidikan",
+    "pk": 4,
+    "fields": {
+      "name": "Sarjana (S1)"
+    }
+  },
+  {
+    "model": "webapp.TingkatPendidikan",
+    "pk": 5,
+    "fields": {
+      "name": "Magister (S2)"
+    }
+  },
+  {
+    "model": "webapp.TingkatPendidikan",
+    "pk": 6,
+    "fields": {
+      "name": "Doktor (S3)"
+    }
+  }
+]

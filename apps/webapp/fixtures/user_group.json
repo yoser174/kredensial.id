@@ -1,0 +1,23 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Tenaga Kesehatan"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Komite Tenaga Kesehatan"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Bagian Sumber Daya Manusia"
+    }
+  }
+]

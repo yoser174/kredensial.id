@@ -1,0 +1,65 @@
+[
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 1,
+    "fields": {
+      "name": "Draft"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 2,
+    "fields": {
+      "name": "Submitted"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 3,
+    "fields": {
+      "name": "Send Back"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 4,
+    "fields": {
+      "name": "Rejected"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 5,
+    "fields": {
+      "name": "Processing"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 6,
+    "fields": {
+      "name": "Failed"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 7,
+    "fields": {
+      "name": "Approved"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 8,
+    "fields": {
+      "name": "Expired"
+    }
+  },
+  {
+    "model": "webapp.StatusPermohonan",
+    "pk": 9,
+    "fields": {
+      "name": "Canceled"
+    }
+  }
+]
