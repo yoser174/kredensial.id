@@ -6,10 +6,10 @@
         document.write(new Date().getFullYear())
 
         </script>
-        , made with <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i></span> by <a href="{% get_theme_variables 'creator_url' %}" target="_blank" class="footer-link fw-medium">{% get_theme_variables 'creator_name' %}</a>
+        {% comment %} , made with <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i></span> by <a href="{% get_theme_variables 'creator_url' %}" target="_blank" class="footer-link fw-medium">{% get_theme_variables 'creator_name' %}</a> {% endcomment %}
       </div>
       <div class="d-none d-lg-inline-block">
-        <a href="{% get_theme_variables 'documentation' %}" target="_blank" class="footer-link me-4">Documentation</a>
+        {% comment %} <a href="{% get_theme_variables 'documentation' %}" target="_blank" class="footer-link me-4">Documentation</a> {% endcomment %}
       </div>
     </div>
   </div>

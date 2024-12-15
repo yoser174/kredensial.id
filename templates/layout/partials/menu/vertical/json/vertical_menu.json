@@ -7,10 +7,10 @@
       "slug": "index"
     },
     {
-      "url": "kredensial_lists",
+      "url": "permohonankredensial",
       "icon": "menu-icon tf-icons mdi mdi-file-outline",
       "name": "Daftar Kredensial",
-      "slug": "kredensial_lists"
+      "slug": "permohonankredensial"
     }
   ]
 }

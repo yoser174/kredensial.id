@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
+
+from apps.webapp.models import PermohonanKredensial
 from web_project import TemplateLayout
-from django.contrib.auth.decorators import login_required
 
 """
 This file is a view controller for multiple pages as a module.
@@ -16,4 +17,15 @@ class SampleView(TemplateView):
         # A function to init the global layout. It is defined in web_project/__init__.py file
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
+        return context
+
+
+class KredensialUpdateView(TemplateView):
+
+    def get_transaction(self, pk):
+        return PermohonanKredensial.objects.get(pk=pk)
+
+    def get_context_data(self, **kwargs):
+        context = TemplateLayout.init(self, super().get_context_data(**kwargs))
+        context["permohonankredensial_id"] = self.get_transaction(self.kwargs["pk"])
         return context

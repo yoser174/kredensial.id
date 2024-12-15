@@ -22,9 +22,13 @@ from web_project.views import SystemView
 urlpatterns = [
     path("admin/", admin.site.urls),
     # starter urls
-    path("", include("apps.webapp.urls")),
+    path("app/", include("apps.webapp.urls")),
     # pages urls
     path("", include("apps.pages.urls")),
+    # api urls
+    path("api/", include("apps.api.urls")),
+    # auth urls
+    path("", include("auth.urls")),
 ]
 
 handler404 = SystemView.as_view(template_name="pages_misc_error.html", status=404)

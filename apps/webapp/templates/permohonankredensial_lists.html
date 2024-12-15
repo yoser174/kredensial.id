@@ -21,7 +21,7 @@
 
 {% block page_js %}
 {{ block.super }}
-<script src="{% static 'js/app-invoice-list.js' %}"></script>
+<script src="{% static 'js/app-kredensial-list.js' %}"></script>
 {% endblock page_js %}
 
 {% block content %}
@@ -30,7 +30,7 @@
 
 
 <!-- Invoice List Widget -->
-
+{% comment %}
 <div class="card mb-4">
   <div class="card-widget-separator-wrapper">
     <div class="card-body card-widget-separator">
@@ -92,24 +92,28 @@
       </div>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 
-<!-- Invoice List Table -->
+<!-- Kredensial List Table -->
 <div class="card">
   <div class="card-datatable table-responsive">
-    <table class="invoice-list-table table">
+    <table class="kredensial-list-table table">
       <thead class="table-light">
         <tr>
-          <th></th>
+          {% comment %} <th></th> {% endcomment %}
           <th></th>
           <th>#ID</th>
-          <th><i class='mdi mdi-trending-up'></i></th>
+          <th>Status</th>
+          <th>Rincian Kewenangan</th>
+          <th>Unit Kerja</th>
+          <th>Kepada</th>
+          {% comment %} <th><i class='mdi mdi-trending-up'></i></th>
           <th>Client</th>
           <th>Total</th>
           <th class="text-truncate">Issued Date</th>
           <th>Balance</th>
           <th>Invoice Status</th>
-          <th class="cell-fit">Actions</th>
+          <th class="cell-fit">Actions</th> {% endcomment %}
         </tr>
       </thead>
     </table>

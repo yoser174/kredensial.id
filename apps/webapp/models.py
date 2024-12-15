@@ -84,6 +84,9 @@ class SelfAssesmentScore(models.Model):
 class StatusPermohonan(models.Model):
     name = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name
+
 
 class PermohonanKredensial(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)

@@ -39,7 +39,7 @@ TEMPLATE_CONFIG = {
 THEME_VARIABLES = {
     "creator_name": "PixInvent",
     "creator_url": "https://pixinvent.com/",
-    "template_name": "Materialize",
+    "template_name": "kredensial.id",
     "template_suffix": "Django Admin Template",
     "template_version": "1.1.0",
     "template_free": False,
