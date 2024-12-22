@@ -18,19 +18,16 @@ class ProfesiNakes(models.Model):
 
 class IdentitasNakes(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=100)
-    nip_nps = models.CharField(max_length=30)
-    place_of_birth = models.CharField(max_length=30)
-    date_of_birth = models.DateField()
-    address = models.TextField()
-    mobile_phone = models.CharField(max_length=30)
-    no_ijazah = models.CharField(max_length=30)
-    no_str = models.CharField(max_length=30)
-    no_sip = models.CharField(max_length=30)
-    starting_work = models.DateField(
-        validators=[MinValueValidator(1984), max_value_current_year],
-        default=current_year,
-    )
+    profesi_nakes = models.ForeignKey(ProfesiNakes, on_delete=models.CASCADE, null=True)
+    nip_nps = models.CharField(max_length=30, null=True)
+    place_of_birth = models.CharField(max_length=30, null=True)
+    date_of_birth = models.DateField(null=True)
+    address = models.TextField(null=True)
+    mobile_phone = models.CharField(max_length=30, null=True)
+    no_ijazah = models.CharField(max_length=30, null=True)
+    no_str = models.CharField(max_length=30, null=True)
+    no_sip = models.CharField(max_length=30, null=True)
+    starting_work = models.DateField(null=True)
 
 
 class TingkatPendidikan(models.Model):

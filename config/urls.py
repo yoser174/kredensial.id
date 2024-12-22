@@ -17,6 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 from web_project.views import SystemView
 
 urlpatterns = [
@@ -29,7 +31,10 @@ urlpatterns = [
     path("api/", include("apps.api.urls")),
     # auth urls
     path("", include("auth.urls")),
-]
+    # avatar urls
+    path("avatar/", include("avatar.urls")),
+    path("avatar/api/", include("avatar.api.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = SystemView.as_view(template_name="pages_misc_error.html", status=404)
 handler403 = SystemView.as_view(

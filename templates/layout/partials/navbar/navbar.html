@@ -1,4 +1,4 @@
-{% load static %}
+{% load static avatar_tags %}
 {% load i18n %}
 
 {% if navbar_detached  %}
@@ -72,7 +72,8 @@
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <div class="avatar avatar-online">
-                <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                {% comment %} <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle"> {% endcomment %}
+                {% avatar user 40 class="w-px-40 h-auto rounded-circle" %}
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-3 py-2">
@@ -81,12 +82,19 @@
                   <div class="d-flex align-items-center">
                     <div class="flex-shrink-0 me-2 pe-1">
                       <div class="avatar avatar-online">
-                        <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                        {% comment %} <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle"> {% endcomment %}
+                        {% avatar user 40 class="w-px-40 h-auto rounded-circle" %}
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <h6 class="mb-0">John Doe</h6>
-                      <small class="text-muted">Admin</small>
+                      <h6 class="mb-0">
+                        {% if get_full_name %}
+                        {{ user.get_full_name }}
+                        {% else %}
+                        {{ user.get_username }}
+                        {% endif %}
+                      </h6>
+                      <small class="text-muted">{% if user.groups.all.0 %}  {{ user.groups.all.0 }} {% else %} ??? {% endif %}</small>
                     </div>
                   </div>
                 </a>
@@ -128,8 +136,8 @@
           </li>
           <!--/ User -->
         </ul>
-
       </div>
+      <div>
       {% if not navbar_detached %}
     </div>
   </nav>

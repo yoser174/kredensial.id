@@ -14,12 +14,26 @@
     flatpickrRange = document.querySelector('#flatpickr-range'),
     flatpickrInline = document.querySelector('#flatpickr-inline'),
     flatpickrFriendly = document.querySelector('#flatpickr-human-friendly'),
-    flatpickrDisabledRange = document.querySelector('#flatpickr-disabled-range');
+    flatpickrDisabledRange = document.querySelector('#flatpickr-disabled-range'),
+    flatpickrDob = document.querySelector('#date_of_birth'),
+    flatPickStartingWork = document.querySelector('#starting_work');
 
   // Date
   if (flatpickrDate) {
     flatpickrDate.flatpickr({
       monthSelectorType: 'static'
+    });
+  }
+
+  if (flatpickrDob) {
+    flatpickrDob.flatpickr({
+      allowInput : true
+    });
+  }
+
+  if (flatPickStartingWork) {
+    flatPickStartingWork.flatpickr({
+      allowInput: true,
     });
   }
 

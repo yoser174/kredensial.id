@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load i18n %}
+{% load avatar_tags %}
 
 {% block title %}Daftar Kredensial{% endblock title %}
 
@@ -10,6 +11,9 @@
 <link rel="stylesheet" href="{% static 'vendor/libs/select2/select2.css' %}" />
 <link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/umd/styles/index.min.css' %}" />
 <link rel="stylesheet" href="{% static 'vendor/libs/flatpickr/flatpickr.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/tagify/tagify.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/umd/styles/index.min.css' %}" />
 {% endblock vendor_css %}
 
 {% block vendor_js %}
@@ -19,12 +23,21 @@
 <script src="{% static 'vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js' %}"></script>
 <script src="{% static 'vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js' %}"></script>
 <script src="{% static 'vendor/libs/flatpickr/flatpickr.js' %}"></script>
+<script src="{% static 'vendor/libs/tagify/tagify.js' %}"></script>
+<script src="{% static 'vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/umd/bundle/popular.min.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js' %}"></script>
 {% endblock vendor_js %}
 
 {% block page_js %}
 {{ block.super }}
-<script src="{% static 'js/transactions-add-update.js' %}"></script>
+<script src="{% static 'js/forms-selects.js' %}"></script>
+<script src="{% static 'js/forms-tagify-users.js' %}"></script>
+<script src="{% static 'js/forms-typeahead.js' %}"></script>
+<script src="{% static 'js/forms-pickers.js' %}"></script>
 {% endblock page_js %}
+
 
 {% block content %}
 <h4 class="py-3 mb-4">
@@ -35,35 +48,361 @@
   <div class="card-body">
     <form class="add-transactions pt-0" id="addTransactionForm" action="{% url 'transactions-add' %}" method="post">
       {% csrf_token %}
-      <div class="form-floating form-floating-outline mb-4">
-        <input type="text" class="form-control" id="customer-name" name="customer" placeholder="Full Name" />
-        <label for="customer-name">Customer</label>
+      <div class="form-floating form-floating-outline col-md-6 mb-4">
+        <input type="text" class="form-control" id="rincian-kewenangan" name="kewenangan" placeholder="Rincian Kewenangan" />
+        <label for="rincian-kewenangan">Rincian Kewenangan</label>
       </div>
-      <div class="form-floating form-floating-outline mb-4">
-        <input type="text" id="transaction-date" class="form-control" name="transaction_date" value="{{ current_date }}" placeholder="Transaction Date" />
-        <label for="transaction-date">Transaction date</label>
+      <div class="form-floating form-floating-outline col-md-6 mb-4">
+        <input type="text" class="form-control" id="unit-kerja" name="unit" placeholder="Unit Kerja" />
+        <label for="unit-kerja">Unit Kerja</label>
       </div>
-      <div class="form-floating form-floating-outline mb-4">
-        <input type="text" id="due-date" class="form-control" name="due_date" placeholder="Due Date" />
-        <label for="due-date">Due date</label>
-      </div>
-      <div class="form-floating form-floating-outline mb-4">
-        <input type="number" id="total-amount" name="total" class="form-control" placeholder="Total Amount" />
-        <label for="total-amount">Total Amount</label>
-      </div>
-      <div class="form-floating form-floating-outline mb-4">
-        <select id="customer-status" class="select2 form-select" name="status">
-          <option value="" disabled selected class="d-none"></option>
-          <option value="Paid">Paid</option>
-          <option value="Due">Due</option>
-          <option value="Canceled">Canceled</option>
-        </select>
-        <label for="customer-status">Status</label>
+      <div class="col-md-6 mb-4">
+        <div class="form-floating form-floating-outline">
+          <input id="TagifyUserList" name="TagifyUserList" class="form-control h-auto" value="" placeholder="Permohonan ditujukan kepada" />
+          <label for="TagifyUserList">Kepada</label>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary me-sm-3 me-1" name="submitButton">Submit</button>
       <a href="{% url 'permohonankredensial' %}" class="btn btn-outline-secondary">Back</a>
     </form>
   </div>
+
+
+      <div class="card-header p-0">
+        <div class="nav-align-top">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#tab-personal-info" aria-controls="tab-personal-info" aria-selected="true">Personal Info</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#tab-pendidikan" aria-controls="tab-pendidikan" aria-selected="false">Pendidikan & Pelatihan / Sertifikat Formal</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-messages" aria-controls="navs-top-messages" aria-selected="false">Messages</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="tab-content p-0">
+          <div class="tab-pane fade show active" id="tab-personal-info" role="tabpanel">
+            <div class="col p-3">
+              <div>
+                {% avatar user 200 %}
+              </div>
+              <div class="align-items-center">
+                <a href="{% url 'avatar:change' %}"><button type="button" class="btn btn-link"> Ganti Avatar</button></a>
+              </div>
+            </div>
+
+            <div>
+              <form class="needs-validation"
+              hx-trigger="submit"
+              hx-post="/app/htmx/update_profile"
+              hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+              hx-target="#result"
+              hx-indicator="#spinner"
+              novalidate >
+                    <div class="row g-4">
+                      <div class="col-md-6">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="fist_name" name="first_name" class="form-control" placeholder="Nama Depan" value="{{ user.first_name }}" required/>
+                          <label for="fist_name">Nama Depan</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Masukkan nama depan Anda.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Nama Belakang" value="{{ user.last_name }}" required/>
+                          <label for="last_name">Nama Belakang</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Masukkan nama belakang Anda.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="nip_nps" name="nip_nps" class="form-control" placeholder="NIP / NPS" value="{{ identitas_nakes.nip_nps }}"/>
+                          <label for="nip_nps">NIP / NPS</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="place_of_birth" name="place_of_birth" class="form-control" placeholder="Tempat lahir" value="{{ identitas_nakes.place_of_birth }}" required/>
+                          <label for="place_of_birth">Tempat lahir</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Masukkan nama kota tempat Anda lahir.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="date_of_birth" name="date_of_birth" class="form-control" placeholder="YYYY-MM-DD"  value="{{ identitas_nakes.date_of_birth }}" required/>
+                          <label for="date_of_birth">Tanggal lahir</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Masukkan tanggal lahir Anda.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating form-floating-outline">
+                          <textarea class="form-control h-px-100" id="address" name="address" placeholder="Isi alamat disini..." required>{{ identitas_nakes.address }}</textarea>
+                          <label for="address">Alamat</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Masukkan alamat Anda.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="mobile_phone" name="mobile_phone" class="form-control" placeholder="08XXXXXXXXXX" value="{{ identitas_nakes.mobile_phone }}" required/>
+                          <label for="mobile_phone">Telepon / HP</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Masukkan nomor telepon Anda.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="email" id="email" class="form-control" value="{{ user.email }}" disabled />
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="no_ijazah" name="no_ijazah" class="form-control" placeholder="No. Ijasah" value="{{ identitas_nakes.no_ijazah }}"/>
+                          <label for="no_ijazah">No. Ijasah</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" name="no_str" class="form-control" placeholder="No. STR" value="{{ identitas_nakes.no_str }}"/>
+                          <label for="no_str">No. STR</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="no_sip" name="no_sip" class="form-control" placeholder="No. SIP" value="{{ identitas_nakes.no_sip }}"/>
+                          <label for="no_sip">No. SIP</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-floating form-floating-outline">
+                          <select x-init="document.getElementById('profesi_nakes').value={{ identitas_nakes.profesi_nakes.id  }};" id="profesi_nakes" name="profesi_nakes" class="form-select" data-allow-clear="true" required>
+                            {% for profesi in profesi_nakes_lists %}
+                            <option value="{{ profesi.id }}">{{ profesi.name }}</option>
+                            {% endfor %}
+                          </select>
+                          <label for="profesi_nakes">Profesi</label>
+                          <div class="valid-feedback"> Looks good! </div>
+                          <div class="invalid-feedback"> Pilih Profesi Anda.</div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating form-floating-outline">
+                          <input type="text" id="starting_work" name="starting_work" class="form-control dob-picker" placeholder="YYYY-MM-DD" value="{{ identitas_nakes.starting_work }}" />
+                          <label for="starting_work">Terhitung mulai kerja</label>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="pt-4">
+                      <button type="submit" class="btn btn-primary me-sm-3 me-1">Update</button>
+                      <img  id="spinner" class="htmx-indicator" src="{% static '/svg/bars.svg' %}"></script>
+                    </div>
+                    <p id="result"></p>
+                  </form>
+            </div>
+
+          </div>
+          <!-- tab-personal-info -->
+
+
+
+
+          <div class="tab-pane fade" id="tab-pendidikan" role="tabpanel">
+            <p>
+              Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice cream. Gummies
+              halvah
+              tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream cheesecake fruitcake.
+            </p>
+            <p class="mb-0">
+              Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah cotton candy
+              liquorice caramels.
+            </p>
+          </div>
+          <div class="tab-pane fade" id="navs-top-messages" role="tabpanel">
+            <p>
+              Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies cupcake gummi
+              bears
+              cake chocolate.
+            </p>
+            <p class="mb-0">
+              Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet roll icing
+              sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly jelly-o tart brownie
+              jelly.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+
+{% comment %} <!-- Identitas Pemohon -->
+<div class="row">
+  <div class="col">
+    <h6 class="mt-4"> Identitas Pemohon </h6>
+    <div class="card mb-3">
+      <div class="card-header overflow-hidden">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#form-tabs-personal" role="tab" aria-selected="true">
+              <span class="mdi mdi-account mdi-20px d-sm-none"></span><span class="d-none d-sm-block">Personal Info</span></button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link " data-bs-toggle="tab" data-bs-target="#form-tabs-account" role="tab" aria-selected="false">
+              <span class="mdi mdi-account-details mdi-20px d-sm-none"></span><span class="d-none d-sm-block">Pendidikan & Pelatihan / Sertifikat Formal</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+    <div class="tab-content">
+        <div class="tab-panel fade active show" id="form-tabs-personal" role="tabpanel">
+          <div class="col mt-4 align-content-lg-end">
+            <div>
+              {% avatar user 200 %}
+            </div>
+            <div class="align-items-center">
+              <a href="{% url 'avatar:change' %}"><button type="button" class="btn btn-link"> Ganti Avatar</button></a>
+            </div>
+          </div>
+          <div class="col mt-4">
+              <div>
+                <form class="needs-validation"
+                hx-trigger="submit"
+                hx-post="/app/htmx/update_profile"
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                hx-target="#result"
+                hx-indicator="#spinner"
+                novalidate >
+                      <div class="row g-4">
+                        <div class="col-md-6">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="fist_name" name="first_name" class="form-control" placeholder="Nama Depan" value="{{ user.first_name }}" required/>
+                            <label for="fist_name">Nama Depan</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Masukkan nama depan Anda.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Nama Belakang" value="{{ user.last_name }}" required/>
+                            <label for="last_name">Nama Belakang</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Masukkan nama belakang Anda.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="nip_nps" name="nip_nps" class="form-control" placeholder="NIP / NPS" value="{{ identitas_nakes.nip_nps }}"/>
+                            <label for="nip_nps">NIP / NPS</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="place_of_birth" name="place_of_birth" class="form-control" placeholder="Tempat lahir" value="{{ identitas_nakes.place_of_birth }}" required/>
+                            <label for="place_of_birth">Tempat lahir</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Masukkan nama kota tempat Anda lahir.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="date_of_birth" name="date_of_birth" class="form-control" placeholder="YYYY-MM-DD"  value="{{ identitas_nakes.date_of_birth }}" required/>
+                            <label for="date_of_birth">Tanggal lahir</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Masukkan tanggal lahir Anda.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-floating form-floating-outline">
+                            <textarea class="form-control h-px-100" id="address" name="address" placeholder="Isi alamat disini..." required>{{ identitas_nakes.address }}</textarea>
+                            <label for="address">Alamat</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Masukkan alamat Anda.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="mobile_phone" name="mobile_phone" class="form-control" placeholder="08XXXXXXXXXX" value="{{ identitas_nakes.mobile_phone }}" required/>
+                            <label for="mobile_phone">Telepon / HP</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Masukkan nomor telepon Anda.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="email" id="email" class="form-control" value="{{ user.email }}" disabled />
+                            <label for="email">Email</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="no_ijazah" name="no_ijazah" class="form-control" placeholder="No. Ijasah" value="{{ identitas_nakes.no_ijazah }}"/>
+                            <label for="no_ijazah">No. Ijasah</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" name="no_str" class="form-control" placeholder="No. STR" value="{{ identitas_nakes.no_str }}"/>
+                            <label for="no_str">No. STR</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="no_sip" name="no_sip" class="form-control" placeholder="No. SIP" value="{{ identitas_nakes.no_sip }}"/>
+                            <label for="no_sip">No. SIP</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating form-floating-outline">
+                            <select x-init="document.getElementById('profesi_nakes').value={{ identitas_nakes.profesi_nakes.id  }};" id="profesi_nakes" name="profesi_nakes" class="form-select" data-allow-clear="true" required>
+                              {% for profesi in profesi_nakes_lists %}
+                              <option value="{{ profesi.id }}">{{ profesi.name }}</option>
+                              {% endfor %}
+                            </select>
+                            <label for="profesi_nakes">Profesi</label>
+                            <div class="valid-feedback"> Looks good! </div>
+                            <div class="invalid-feedback"> Pilih Profesi Anda.</div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-floating form-floating-outline">
+                            <input type="text" id="starting_work" name="starting_work" class="form-control dob-picker" placeholder="YYYY-MM-DD" value="{{ identitas_nakes.starting_work }}" />
+                            <label for="starting_work">Terhitung mulai kerja</label>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="pt-4">
+                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Update</button>
+                        <img  id="spinner" class="htmx-indicator" src="{% static '/svg/bars.svg' %}"></script>
+                      </div>
+                      <p id="result"></p>
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="tab-panel" id="form-tabs-account" role="tabpanel">
+          <div class="col mt-4 align-content-lg-end">
+            Sfsdf
+          </div>
+        </div>
+
+  </div>
 </div>
+
+</div> {% endcomment %}
+
 <!--/ Add Transactions Form -->
 {% endblock %}

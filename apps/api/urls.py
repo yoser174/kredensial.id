@@ -5,7 +5,9 @@ from apps.api import views
 
 
 router = routers.DefaultRouter()
+router.register(r"users", views.UserViewSet)
 router.register(r"permohonan_kredensial", views.PermohonanKredensialViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from apps.webapp.pages.permohonankredensial.view import (
     PermohonanKredensialAddView,
     PermohonanKredensialListView,
+    update_profile,
 )
 from .views import SampleView
 
@@ -31,5 +32,10 @@ urlpatterns = [
             )
         ),
         name="transactions-add",
+    ),
+    path(
+        "htmx/update_profile",
+        login_required(update_profile),
+        name="htmx_update_profile",
     ),
 ]

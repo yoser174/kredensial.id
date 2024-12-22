@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 
 from apps.webapp.models import PermohonanKredensial
@@ -28,4 +29,6 @@ class KredensialUpdateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["permohonankredensial_id"] = self.get_transaction(self.kwargs["pk"])
+        uid = self.request.session["mid"]
+        context["user_profile"] = User.objects.get(id=uid)
         return context

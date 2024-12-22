@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "auth.apps.AuthConfig",
     "apps.webapp",
     "apps.pages",
+    "avatar",
+    "django_htmx",
     "rest_framework",
     "rest_framework_json_api",
     "rest_framework_datatables",
@@ -69,6 +71,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -167,6 +170,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "src" / "assets",
 ]
 
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+
 # Default URL on which Django application runs for specific environment
 BASE_URL = os.environ.get("BASE_URL", default="http://127.0.0.1:8000")
 
@@ -204,3 +211,11 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework_datatables.pagination.DatatablesPageNumberPagination",
     "PAGE_SIZE": 50,
 }
+
+
+AVATAR_DEFAULT_URL = "img/avatars/1.png"
+AVATAR_GRAVATAR_DEFAULT = "img/avatars/1.png"
+AVATAR_PROVIDERS = (
+    "avatar.providers.PrimaryAvatarProvider",
+    "avatar.providers.DefaultAvatarProvider",
+)

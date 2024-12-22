@@ -1,0 +1,24 @@
+.spinner-wrapper {
+  background-color: #f7f7f9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.htmx-indicator{
+  opacity:0;
+  transition: opacity 500ms ease-in;
+}
+.htmx-request .htmx-indicator{
+  opacity:1;
+}
+.htmx-request.htmx-indicator{
+  opacity:1;
+}

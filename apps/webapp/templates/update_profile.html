@@ -1,0 +1,20 @@
+{% if  form.is_valid %}
+<div id="alert-success" class="alert alert-success" role="alert" x-init="
+const alertSuccessEl = document.getElementById('alert-success');
+setTimeout(()=>{
+alertSuccessEl.style.display = 'none';
+},10000);
+">
+  ✅ update profil berhasil.
+</div>
+{% else %}
+  {% if form.errors %}
+    {% for field in form %}
+      {% for error in field.errors %}
+        <div class="alert alert-danger" role="alert">
+          {{ field.name }} {{ error|escape }}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endif %}
